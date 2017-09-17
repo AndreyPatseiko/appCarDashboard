@@ -13,17 +13,37 @@
     <div class="temp">
       <p class="caption">
         Температуры
-      </p>    
+      </p>
 
     </div>
     <div class="speed">
-      <p class="caption">Скорости обдува            </p>
+      <p class="caption">Скорости обдува</p>
     </div>
   </div>
 
   <p>
-  
-  </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  </p>
+  <button ion-button secondary (click)="BTAction()">Send bluetooth</button>
+
+  <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
+  <ion-list padding>
+    <button ion-button block (click)="startScanning()">scan</button>
+    <ion-list-header>
+      Paired Devices
+    </ion-list-header>
+    <ion-item *ngFor="let device of pairedDevices">
+      {{device.name}}
+    </ion-item>
+    <button ion-button block (click)="disconnect()">Disconnect</button>
+    <ion-list-header>
+      availlable Devices
+    </ion-list-header>
+    <ion-item *ngFor='let device of unpairedDevices'>
+    <span (click)="selectDevice(device.address)">
+      {{device.name}}
+    </span>
+    </ion-item>
+    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+  </ion-list>
 </ion-content>
